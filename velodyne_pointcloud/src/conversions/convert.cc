@@ -32,6 +32,12 @@ namespace velodyne_pointcloud
     private_nh.param<double>("max_range", config_.max_range, 200.0);
     private_nh.param<bool>("organize_cloud", config_.organize_cloud, false);
 
+    std::string packet_topic;
+    private_nh.param<std::string>("packet_topic", packet_topic, "velodyne_packets");
+
+    std::string cloud_topic;
+    private_nh.param<std::string>("cloud_topic", cloud_topic, "velodyne_pointcloud");
+
     boost::optional<velodyne_pointcloud::Calibration> calibration = data_->setup(private_nh);
     if(calibration)
     {
@@ -61,7 +67,7 @@ namespace velodyne_pointcloud
 
     // advertise output point cloud (before subscribing to input data)
     output_ =
-      node.advertise<sensor_msgs::PointCloud2>("velodyne_points", 10);
+      node.advertise<sensor_msgs::PointCloud2>(cloud_topic, 10);
 
     srv_ = boost::make_shared <dynamic_reconfigure::Server<velodyne_pointcloud::
       CloudNodeConfig> > (private_nh);
@@ -70,9 +76,9 @@ namespace velodyne_pointcloud
     f = boost::bind (&Convert::callback, this, _1, _2);
     srv_->setCallback (f);
 
-    // subscribe to VelodyneScan packets
+    // subscribe to VelodyneScanUnified packets
     velodyne_scan_ =
-      node.subscribe("velodyne_packets", 10,
+      node.subscribe(packet_topic, 10,
                      &Convert::processScan, (Convert *) this,
                      ros::TransportHints().tcpNoDelay(true));
 
@@ -83,7 +89,7 @@ namespace velodyne_pointcloud
     diag_min_freq_ = 2.0;
     diag_max_freq_ = 20.0;
     using namespace diagnostic_updater;
-    diag_topic_.reset(new TopicDiagnostic("velodyne_points", diagnostics_,
+    diag_topic_.reset(new TopicDiagnostic(cloud_topic, diagnostics_,
                                        FrequencyStatusParam(&diag_min_freq_,
                                                             &diag_max_freq_,
                                                             0.1, 10),
@@ -126,7 +132,7 @@ namespace velodyne_pointcloud
   }
 
   /** @brief Callback for raw scan messages. */
-  void Convert::processScan(const velodyne_msgs::VelodyneScan::ConstPtr &scanMsg)
+  void Convert::processScan(const velodyne_msgs::VelodyneScanUnified::ConstPtr &scanMsg)
   {
     if (output_.getNumSubscribers() == 0)         // no one listening?
       return;                                     // avoid much work

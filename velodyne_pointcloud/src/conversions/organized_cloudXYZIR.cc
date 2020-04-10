@@ -34,7 +34,7 @@ namespace velodyne_pointcloud
     ++cloud.height;
   }
 
-  void OrganizedCloudXYZIR::setup(const velodyne_msgs::VelodyneScan::ConstPtr& scan_msg){
+  void OrganizedCloudXYZIR::setup(const velodyne_msgs::VelodyneScanUnified::ConstPtr& scan_msg){
     DataContainerBase::setup(scan_msg);
     iter_x = sensor_msgs::PointCloud2Iterator<float>(cloud, "x");
     iter_y = sensor_msgs::PointCloud2Iterator<float>(cloud, "y");

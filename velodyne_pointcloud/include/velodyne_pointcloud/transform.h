@@ -70,7 +70,7 @@ public:
   }
 
 private:
-  void processScan(const velodyne_msgs::VelodyneScan::ConstPtr& scanMsg);
+  void processScan(const velodyne_msgs::VelodyneScanUnified::ConstPtr& scanMsg);
 
   // Pointer to dynamic reconfigure service srv_
   boost::shared_ptr<dynamic_reconfigure::Server<velodyne_pointcloud::TransformNodeConfig>> srv_;
@@ -78,9 +78,9 @@ private:
 
   const std::string tf_prefix_;
   boost::shared_ptr<velodyne_rawdata::RawData> data_;
-  message_filters::Subscriber<velodyne_msgs::VelodyneScan> velodyne_scan_;
+  message_filters::Subscriber<velodyne_msgs::VelodyneScanUnified> velodyne_scan_;
   ros::Publisher output_;
-  boost::shared_ptr<tf::MessageFilter<velodyne_msgs::VelodyneScan>> tf_filter_ptr_;
+  boost::shared_ptr<tf::MessageFilter<velodyne_msgs::VelodyneScanUnified>> tf_filter_ptr_;
   boost::shared_ptr<tf::TransformListener> tf_ptr_;
 
   /// configuration parameters

@@ -50,7 +50,7 @@
 #include <vector>
 
 #include <ros/ros.h>
-#include <velodyne_msgs/VelodyneScan.h>
+#include <velodyne_msgs/VelodyneScanUnified.h>
 #include <velodyne_pointcloud/calibration.h>
 #include <velodyne_pointcloud/datacontainerbase.h>
 

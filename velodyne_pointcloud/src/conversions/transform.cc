@@ -69,10 +69,10 @@ namespace velodyne_pointcloud
     f = boost::bind (&Transform::reconfigure_callback, this, _1, _2);
     srv_->setCallback (f);
 
-    // subscribe to VelodyneScan packets using transform filter
+    // subscribe to VelodyneScanUnified packets using transform filter
     velodyne_scan_.subscribe(node, "velodyne_packets", 10);
-    tf_filter_ptr_ = boost::shared_ptr<tf::MessageFilter<velodyne_msgs::VelodyneScan> >(
-            new tf::MessageFilter<velodyne_msgs::VelodyneScan>(velodyne_scan_, *tf_ptr_, config_.target_frame, 10));
+    tf_filter_ptr_ = boost::shared_ptr<tf::MessageFilter<velodyne_msgs::VelodyneScanUnified> >(
+            new tf::MessageFilter<velodyne_msgs::VelodyneScanUnified>(velodyne_scan_, *tf_ptr_, config_.target_frame, 10));
     tf_filter_ptr_->registerCallback(boost::bind(&Transform::processScan, this, _1));
     private_nh.param<std::string>("fixed_frame", config_.fixed_frame, "odom");
 
@@ -132,7 +132,7 @@ namespace velodyne_pointcloud
    *       the configured @c frame_id can succeed.
    */
   void
-    Transform::processScan(const velodyne_msgs::VelodyneScan::ConstPtr &scanMsg)
+    Transform::processScan(const velodyne_msgs::VelodyneScanUnified::ConstPtr &scanMsg)
   {
     if (output_.getNumSubscribers() == 0)         // no one listening?
       return;                                     // avoid much work

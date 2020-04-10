@@ -8,7 +8,7 @@ ROS device driver for Velodyne 3D LIDARs.
 \section read Velodyne device driver
 
 ROS device driver node that captures Velodyne 3D LIDAR data and
-publishes it to the \b velodyne_msgs/VelodyneScan topic.
+publishes it to the \b velodyne_msgs/VelodyneScanUnified topic.
 
 \subsection read_examples Examples
 
