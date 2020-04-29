@@ -21,8 +21,8 @@
     <param name="max_range" value="$(arg max_range)"/>
     <param name="min_range" value="$(arg min_range)"/>
     <param name="organize_cloud" value="$(arg organize_cloud)"/>
-    <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScanUnified_left_front"/>
-    <!-- <param name="packet_topic" value="left_front"/> -->
+    <!-- <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScan_left_front"/> -->
+    <param name="packet_topic" value="left_front"/>
     <param name="cloud_topic" value="velodyne/left_front"/>
   </node>
 
@@ -35,8 +35,8 @@
     <param name="max_range" value="$(arg max_range)"/>
     <param name="min_range" value="$(arg min_range)"/>
     <param name="organize_cloud" value="$(arg organize_cloud)"/>
-    <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScanUnified_left_rear"/>
-    <!-- <param name="packet_topic" value="left_rear"/> -->
+    <!-- <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScan_left_rear"/> -->
+    <param name="packet_topic" value="left_rear"/>
     <param name="cloud_topic" value="velodyne/left_rear"/>
   </node>
 
@@ -49,8 +49,8 @@
     <param name="max_range" value="$(arg max_range)"/>
     <param name="min_range" value="$(arg min_range)"/>
     <param name="organize_cloud" value="$(arg organize_cloud)"/>
-    <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScanUnified_right_front"/>
-    <!-- <param name="packet_topic" value="right_front"/> -->
+    <!-- <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScan_right_front"/> -->
+    <param name="packet_topic" value="right_front"/>
     <param name="cloud_topic" value="velodyne/right_front"/>
   </node>
 
@@ -63,8 +63,8 @@
     <param name="max_range" value="$(arg max_range)"/>
     <param name="min_range" value="$(arg min_range)"/>
     <param name="organize_cloud" value="$(arg organize_cloud)"/>
-    <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScanUnified_right_rear"/>
-    <!-- <param name="packet_topic" value="right_rear"/> -->
+    <!-- <param name="packet_topic" value="/apollo/sensor/velodyne32/VelodyneScan_right_rear"/> -->
+    <param name="packet_topic" value="right_rear"/>
     <param name="cloud_topic" value="velodyne/right_rear"/>
   </node>
 </launch>

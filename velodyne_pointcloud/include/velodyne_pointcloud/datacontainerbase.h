@@ -33,7 +33,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include <tf/transform_listener.h>
-#include <velodyne_msgs/VelodyneScanUnified.h>
+#include <velodyne_msgs/VelodyneScan.h>
 #include <sensor_msgs/point_cloud2_iterator.h>
 #include <Eigen/Dense>
 #include <string>
@@ -106,7 +106,7 @@ public:
     }
   };
 
-  virtual void setup(const velodyne_msgs::VelodyneScanUnified::ConstPtr& scan_msg)
+  virtual void setup(const velodyne_msgs::VelodyneScan::ConstPtr& scan_msg)
   {
     cloud.header = scan_msg->header;
     cloud.data.resize(scan_msg->packets.size() * config_.scans_per_packet * cloud.point_step);

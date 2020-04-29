@@ -40,7 +40,7 @@
 
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
-#include <velodyne_msgs/VelodyneScanUnified.h>
+#include <velodyne_msgs/VelodyneScan.h>
 
 #include "velodyne_driver/driver.h"
 
@@ -183,7 +183,7 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
 
   // raw packet output topic
   output_ =
-    node.advertise<velodyne_msgs::VelodyneScanUnified>("velodyne_packets", 10);
+    node.advertise<velodyne_msgs::VelodyneScan>("velodyne_packets", 10);
 
   last_azimuth_ = -1;
 }
@@ -202,7 +202,7 @@ bool VelodyneDriver::poll(void)
   }
 
   // Allocate a new shared pointer for zero-copy sharing with other nodelets.
-  velodyne_msgs::VelodyneScanUnifiedPtr scan(new velodyne_msgs::VelodyneScanUnified);
+  velodyne_msgs::VelodyneScanPtr scan(new velodyne_msgs::VelodyneScan);
 
   if( config_.cut_angle >= 0) //Cut at specific angle feature enabled
   {

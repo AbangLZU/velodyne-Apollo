@@ -76,7 +76,7 @@ namespace velodyne_pointcloud
     f = boost::bind (&Convert::callback, this, _1, _2);
     srv_->setCallback (f);
 
-    // subscribe to VelodyneScanUnified packets
+    // subscribe to VelodyneScan packets
     velodyne_scan_ =
       node.subscribe(packet_topic, 10,
                      &Convert::processScan, (Convert *) this,
@@ -132,7 +132,7 @@ namespace velodyne_pointcloud
   }
 
   /** @brief Callback for raw scan messages. */
-  void Convert::processScan(const velodyne_msgs::VelodyneScanUnified::ConstPtr &scanMsg)
+  void Convert::processScan(const velodyne_msgs::VelodyneScan::ConstPtr &scanMsg)
   {
     if (output_.getNumSubscribers() == 0)         // no one listening?
       return;                                     // avoid much work

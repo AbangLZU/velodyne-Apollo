@@ -64,7 +64,7 @@ class Convert
 
   private:
     void callback(velodyne_pointcloud::CloudNodeConfig &config, uint32_t level);
-    void processScan(const velodyne_msgs::VelodyneScanUnified::ConstPtr &scanMsg);
+    void processScan(const velodyne_msgs::VelodyneScan::ConstPtr &scanMsg);
 
     boost::shared_ptr<dynamic_reconfigure::Server<velodyne_pointcloud::CloudNodeConfig> > srv_;
 
